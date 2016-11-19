@@ -1,7 +1,6 @@
 package eu.svez.backpressuredemo.http
 
 import java.nio.file.Paths
-import java.util.concurrent.TimeUnit
 
 import akka.actor.ActorSystem
 import akka.agent.Agent
@@ -12,7 +11,6 @@ import akka.stream.scaladsl.FileIO
 import eu.svez.backpressuredemo.Flows._
 import kamon.Kamon
 
-import scala.concurrent.duration.{FiniteDuration, _}
 import scala.util.Try
 
 object FileClient extends App{
@@ -23,7 +21,7 @@ object FileClient extends App{
 
   Kamon.start()
 
-  val sourceValve = Agent(1.second)
+  val sourceValve = Agent(1)
 
   val byteSource = FileIO
     .fromPath(Paths.get("/tmp/bigfile.zip"))
@@ -52,7 +50,7 @@ object FileClient extends App{
 
   Iterator.continually(io.StdIn.readLine()).foreach {
     case ln if ln.startsWith("source=") =>
-      Try(sourceValve.send(FiniteDuration((1000 / ln.replace("source=", "").toDouble).toLong, TimeUnit.MILLISECONDS))).recover{
+      Try(sourceValve.send(ln.replace("source=", "").toInt)).recover{
         case e => println(s"Error: ${e.getMessage}")
       }
     case _ => println("I don't understand")

@@ -7,7 +7,7 @@ import akka.stream.scaladsl.Flow
 import kamon.Kamon
 
 import scala.concurrent.Future
-import scala.concurrent.duration.FiniteDuration
+import scala.concurrent.duration._
 
 object Flows {
 
@@ -20,12 +20,12 @@ object Flows {
     }
   }
 
-  def valve[T](f: => Future[FiniteDuration])(implicit system: ActorSystem): Flow[T, T, NotUsed] = {
+  def valve[T](rate: => Future[Int])(implicit system: ActorSystem): Flow[T, T, NotUsed] = {
     implicit val ec = system.dispatcher
 
     Flow[T].mapAsync(1) { x =>
-      f.flatMap { pause =>
-        after(pause, system.scheduler)(Future.successful(x))
+      rate.flatMap { r =>
+        after(1.second / r, system.scheduler)(Future.successful(x))
       }
     }
   }

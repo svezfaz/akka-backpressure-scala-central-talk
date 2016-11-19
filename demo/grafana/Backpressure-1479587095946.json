@@ -76,7 +76,7 @@
           "yaxes": [
             {
               "format": "short",
-              "label": null,
+              "label": "msg/s",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -133,7 +133,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -161,7 +161,7 @@
           "yaxes": [
             {
               "format": "short",
-              "label": null,
+              "label": "msg/s",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -176,7 +176,15 @@
               "show": true
             }
           ]
-        },
+        }
+      ],
+      "title": "New row"
+    },
+    {
+      "collapse": true,
+      "editable": true,
+      "height": "250px",
+      "panels": [
         {
           "aliasColors": {},
           "bars": false,
@@ -210,7 +218,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -238,7 +246,7 @@
           "yaxes": [
             {
               "format": "short",
-              "label": null,
+              "label": "msg/s",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -255,13 +263,6 @@
           ]
         }
       ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [],
       "title": "New row"
     }
   ],
@@ -302,6 +303,6 @@
   },
   "refresh": "5s",
   "schemaVersion": 12,
-  "version": 2,
+  "version": 8,
   "links": []
 }

@@ -22,7 +22,7 @@ object MessageClient extends App{
 
   Kamon.start()
 
-  val sourceValve = Agent(1.second)
+  val sourceValve = Agent(1)
 
   val source = Source.repeat("hello")
     .via(valve(sourceValve.future()))
@@ -45,7 +45,7 @@ object MessageClient extends App{
 
   Iterator.continually(io.StdIn.readLine()).foreach {
     case ln if ln.startsWith("source=") =>
-      Try(sourceValve.send(FiniteDuration((1000 / ln.replace("source=", "").toDouble).toLong, TimeUnit.MILLISECONDS))).recover{
+      Try(sourceValve.send(ln.replace("source=", "").toInt)).recover{
         case e => println(s"Error: ${e.getMessage}")
       }
     case _ => println("I don't understand")
