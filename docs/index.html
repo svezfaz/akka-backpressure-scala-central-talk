@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Stream Processing</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<script type="text/template">
+						# Back-pressure explained with Akka-Streams and Akka-HTTP
+						*Stefano Bonetti*
+
+						![GitHub](asset/github.png "Logo Title Text 1")
+
+						[@svezfaz](https://github.com/svezfaz)
+
+					</script>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# THE PROBLEM
+						</script>
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_1.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_2.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_3.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_4.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_5.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_6.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_7.svg">
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							# THE REACTIVE WAY
+						</script>
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_8.svg">
+					</section>
+					<section>
+						<img class="plain noalpha" src="asset/reactive_streams_9.svg">
+					</section>
+					<section>
+						<pre>
+							<code data-trim data-noescape class="hljs java">
+package org.reactivestreams;
+
+public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
+}
+
+public interface Publisher<T> {
+    public void subscribe(Subscriber<? super T> s);
+}
+public interface Subscriber<T> {
+    public void onSubscribe(Subscription s);
+    public void onNext(T t);
+    public void onError(Throwable t);
+    public void onComplete();
+}
+public interface Subscription {
+    public void request(long n);
+    public void cancel();
+}
+							</code>
+						</pre>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				transition: 'none',
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+		</script>
+	</body>
+</html>
