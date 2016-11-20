@@ -1,4 +1,4 @@
-package eu.svez.backpressuredemo.local
+package eu.svez.backpressuredemo.A_local
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
@@ -6,7 +6,7 @@ import akka.stream.scaladsl.{Flow, Sink, Source}
 
 object HelloWorld extends App {
 
-  implicit val system = ActorSystem("streams-local-demo")
+  implicit val system = ActorSystem("stream-demo")
   implicit val executionContext = system.dispatcher
   implicit val materializer = ActorMaterializer()
 
@@ -16,6 +16,6 @@ object HelloWorld extends App {
 
   val sink = Sink.foreach[String](println)
 
-  (source via flow runWith sink).onComplete { _ =>  system.terminate() }
+  (source via flow runWith sink).onComplete { _ => system.terminate() }
 }
 
