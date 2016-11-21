@@ -24,6 +24,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<section>
 				<section data-markdown>
 					<script type="text/template">
 						# Back-pressure explained with Akka-Streams and Akka-HTTP
@@ -33,12 +34,24 @@
 
 					</script>
 				</section>
+				<section data-markdown>
+					<script type="text/template">
+						#BACK-PRESSURE
+1. what is it
+
+2. why is it important
+
+3. how to (easily) get it
+					</script>
+				</section>
+			</section>
+
 				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# THE PROBLEM
-						</script>
-					</section>
+						<section data-markdown>
+							<script type="text/template">
+								# THE PROBLEM
+							</script>
+						</section>
 					<section>
 						<img class="plain noalpha" src="asset/reactive_streams_1.svg">
 					</section>
@@ -99,37 +112,6 @@ public interface Subscription {
 						</pre>
 					</section>
 				</section>
-
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# THE CODE
-						</script>
-					</section>
-				</section>
-
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# THE TAKEAWAYS
-- Composability (nice abstractions)
-- Open (many implementations)
-- Reliable (no message drops)
-- Safe (memory bound)
-- Adaptive (as fast as possible, not faster)
-- Fun (Akka rulez)
-						</script>
-					</section>
-				</section>
-
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							# THE QUESTIONS?
-						</script>
-					</section>
-				</section>
-
 			</div>
 		</div>
 
