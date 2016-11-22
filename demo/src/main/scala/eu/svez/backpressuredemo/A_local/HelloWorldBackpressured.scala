@@ -7,15 +7,18 @@ import eu.svez.backpressuredemo.StreamDemo
 
 object HelloWorldBackpressured extends StreamDemo {
 
+  sourceRate.send(5)
+  sinkRate.send(5)
+
   Source.repeat("world")
     .via(valve(sourceRate.future()))
     .via(meter("source"))
     .map(x => s"Hello $x!")
-//    .buffer(16, OverflowStrategy.backpressure)
+    .buffer(16, OverflowStrategy.backpressure)
     .via(valve(sinkRate.future()))
     .via(meter("sink"))
     .runWith(Sink.ignore)
 
-  readFromStdIn()
+  readRatesFromStdIn()
 }
 

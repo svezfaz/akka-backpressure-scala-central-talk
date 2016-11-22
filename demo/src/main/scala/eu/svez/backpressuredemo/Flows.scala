@@ -6,7 +6,7 @@ import akka.pattern.after
 import akka.stream.scaladsl.Flow
 import kamon.Kamon
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
 
 object Flows {
@@ -20,14 +20,11 @@ object Flows {
     }
   }
 
-  def valve[T](rate: => Future[Int])(implicit system: ActorSystem): Flow[T, T, NotUsed] = {
-    implicit val ec = system.dispatcher
-
+  def valve[T](rate: => Future[Int])(implicit system: ActorSystem, ec: ExecutionContext): Flow[T, T, NotUsed] =
     Flow[T].mapAsync(1) { x =>
       rate.flatMap { r =>
         after(1.second / r, system.scheduler)(Future.successful(x))
       }
     }
-  }
 
 }

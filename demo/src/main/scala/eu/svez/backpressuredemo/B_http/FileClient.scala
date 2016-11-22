@@ -23,9 +23,11 @@ object FileClient extends StreamDemo {
     entity = HttpEntity(ContentTypes.`application/octet-stream`, byteSource)
   )
 
+  sourceRate.send(5)
+
   Http().singleRequest(request).onComplete{ _ =>
     println("All sent!")
   }
 
-  readFromStdIn()
+  readRatesFromStdIn()
 }

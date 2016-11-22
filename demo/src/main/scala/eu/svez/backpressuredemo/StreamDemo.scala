@@ -23,7 +23,7 @@ trait StreamDemo extends App {
     system.terminate()
   }
 
-  def readFromStdIn() = {
+  def readRatesFromStdIn() = {
     Iterator.continually(io.StdIn.readLine()).foreach {
       case ln if ln.startsWith("source=") =>
         Try(sourceRate.send(ln.replace("source=", "").toInt)).recover {

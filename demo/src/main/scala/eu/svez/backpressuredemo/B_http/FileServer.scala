@@ -23,9 +23,11 @@ object FileServer extends StreamDemo{
   val host = "0.0.0.0"
   val port = 8080
 
+  sinkRate.send(5)
+
   Http().bindAndHandle(route, host, port).map { _ =>
     println(s"Server started on $host:$port")
   }
 
-  readFromStdIn()
+  readRatesFromStdIn()
 }
