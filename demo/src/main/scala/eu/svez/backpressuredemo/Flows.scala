@@ -20,11 +20,9 @@ object Flows {
     }
   }
 
-  def valve[T](rate: => Future[Int])(implicit system: ActorSystem, ec: ExecutionContext): Flow[T, T, NotUsed] =
+  def valve[T](rate: => Int)(implicit system: ActorSystem, ec: ExecutionContext): Flow[T, T, NotUsed] =
     Flow[T].mapAsync(1) { x =>
-      rate.flatMap { r =>
-        after(1.second / r, system.scheduler)(Future.successful(x))
-      }
+      after(1.second / rate, system.scheduler)(Future.successful(x))
     }
 
 }

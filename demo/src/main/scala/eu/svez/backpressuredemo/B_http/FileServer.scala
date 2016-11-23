@@ -10,7 +10,7 @@ import eu.svez.backpressuredemo.StreamDemo
 object FileServer extends StreamDemo{
 
   val flow = Flow[ByteString]
-    .via(valve(sinkRate.future))
+    .via(valve(sinkRate.get))
     .via(meter("sinkHttp"))
 
   val route = path("file") {

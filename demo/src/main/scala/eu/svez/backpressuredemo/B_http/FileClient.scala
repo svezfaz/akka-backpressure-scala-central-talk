@@ -12,7 +12,7 @@ object FileClient extends StreamDemo {
 
   val byteSource = FileIO
     .fromPath(Paths.get("/tmp/bigfile.zip"))
-    .via(valve(sourceRate.future))
+    .via(valve(sourceRate.get))
     .via(meter("sourceHttp"))
 
   val host = "localhost"
