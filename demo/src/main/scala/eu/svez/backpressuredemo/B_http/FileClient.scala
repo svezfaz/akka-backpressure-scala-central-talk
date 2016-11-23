@@ -15,7 +15,7 @@ object FileClient extends StreamDemo {
     .via(valve(sourceRate.future))
     .via(meter("sourceHttp"))
 
-  val host = "0.0.0.0"
+  val host = "localhost"
   val port = 8080
 
   val request = HttpRequest(

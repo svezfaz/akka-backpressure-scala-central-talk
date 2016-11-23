@@ -10,7 +10,7 @@ object HelloWorldBackpressured extends StreamDemo {
   sourceRate.send(5)
   sinkRate.send(5)
 
-  Source.repeat("world")
+  Source.repeat("Hello world!")
     .via(valve(sourceRate.future()))
     .via(meter("source"))
     .buffer(100, OverflowStrategy.backpressure)
