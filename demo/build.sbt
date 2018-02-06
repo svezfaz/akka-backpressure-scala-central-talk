@@ -4,21 +4,13 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
-val akkaHttpV = "10.0.0"
-val akkaV = "2.4.14"
-val kamonV = "0.6.3"
-
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http"              % akkaHttpV,
-  "com.typesafe.akka" %% "akka-agent"             % akkaV,
-  "com.typesafe.akka" %% "akka-slf4j"             % akkaV,
+  "com.typesafe.akka" %% "akka-stream"            % "2.5.9",
+  "com.typesafe.akka" %% "akka-slf4j"             % "2.5.9",
   "org.slf4j"         %  "slf4j-api"              % "1.7.16"  % Runtime,
   "ch.qos.logback"    %  "logback-classic"        % "1.1.5"   % Runtime,
-  "io.kamon"          %% "kamon-core"             % kamonV,
-  "io.kamon"          %% "kamon-statsd"           % kamonV
+  "io.kamon"          %% "kamon-core"             % "0.6.7",
+  "io.kamon"          %% "kamon-statsd"           % "0.6.7"
 )
 
-aspectjSettings
-javaOptions in run <++= AspectjKeys.weaverOptions in Aspectj
 fork in run := true
-connectInput in run := true
